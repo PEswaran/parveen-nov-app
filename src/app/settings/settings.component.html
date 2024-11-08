@@ -1,0 +1,23 @@
+<div *ngIf="articles.length > 0">
+  <mat-card class="news-card" *ngFor="let article of articles">
+    <mat-card-header>
+      <div mat-card-avatar class="news-avatar"></div>
+      <mat-card-title>{{ article.title }}</mat-card-title>
+      <mat-card-subtitle>{{ article.author }} - {{ article.publishedAt | date:'medium' }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img mat-card-image [src]="article.urlToImage" alt="{{ article.title }}">
+
+    <mat-card-content>
+      <p>{{ article.description }}</p>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button color="primary" [href]="article.url" target="_blank">Read More</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<ng-template #noData>
+  <p>No articles available.</p>
+</ng-template>
