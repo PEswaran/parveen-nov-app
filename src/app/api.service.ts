@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 interface Source {
   id: string | null;
@@ -27,8 +28,7 @@ interface ApiResponse {
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl =
-    'https://newsapi.org/v2/top-headlines?country=us&apiKey=1a8421f4ad7b4c63880b80d97cbfceec';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
