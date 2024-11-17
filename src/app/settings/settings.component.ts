@@ -16,6 +16,8 @@ export class SettingsComponent {
   constructor(private articleService: ApiService) {}
 
   ngOnInit(): void {
+    const keywords = ['stock', 'market'];
+
     // Calling the GET method on component initialization
     this.articleService
       .getData()
@@ -28,6 +30,15 @@ export class SettingsComponent {
       )
       .subscribe((filteredArticles) => {
         this.articles = filteredArticles;
+        const filteredPayloads = this.articles.filter((payload) =>
+          keywords.some((keyword) =>
+            Object.values(payload).some(
+              (value) => typeof value === 'string' && value.includes(keyword)
+            )
+          )
+        );
+
+        console.log(filteredPayloads);
       });
   }
 }

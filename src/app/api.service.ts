@@ -28,12 +28,21 @@ interface ApiResponse {
   providedIn: 'root',
 })
 export class ApiService {
-  private apiUrl = environment.apiUrl;
+  private defaultQuery = 'top-headlines?country=us'
 
   constructor(private http: HttpClient) {}
 
   // Example GET request
   getData(): Observable<ApiResponse> {
-    return this.http.get<ApiResponse>(`${this.apiUrl}`);
+    const apiUrl =
+    environment.apiBaseUrl +  this.defaultQuery + environment.apiKey;
+    return this.http.get<ApiResponse>(`${apiUrl}`);
+  }
+
+  getStockData(stockQueryString: string): Observable<ApiResponse> {
+    const apiUrl =
+    environment.apiBaseUrl +  stockQueryString + environment.apiKey;
+
+    return this.http.get<ApiResponse>(`${apiUrl}`);
   }
 }
